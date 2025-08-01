@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Урилга - Төрийн дээд шагнал</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 80px auto;
+      background: rgba(0, 0, 0, 0.8);
+      color: #f5f5f5;
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+      padding: 40px 30px;
+      text-align: center;
+      animation: fadeIn 2s ease-out;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      margin-bottom: 20px;
+      color: #FFD700;
+      opacity: 1;
+      animation: glowText 3s infinite;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+
+    @keyframes glowText {
+      0%, 100% { text-shadow: 0 0 12px #FFD700; }
+      50% { text-shadow: 0 0 25px #FFCC00; }
+    }
+
+    /* Fix fadeInUp animation with visibility */
+    .ceremony-description,
+    .info,
+    .gold-line,
+    .footer {
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        transform: translateY(20px);
+        opacity: 0;
+        visibility: hidden;
+      }
+      1% {
+        visibility: visible;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .ceremony-description {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #ddd;
+      animation: fadeInUp 1.5s ease forwards 2.5s;
+    }
+
+    .ceremony-description span {
+      color: #FFD700;
+      font-weight: bold;
+    }
+
+    .info {
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      border: 2px solid #FFD700;
+      animation: fadeInUp 1.5s ease forwards 4s;
+    }
+
+    .info p {
+      margin: 10px 0;
+      font-size: 17px;
+      color: #ccc;
+    }
+
+    .highlight {
+      color: #FFD700;
+      font-weight: bold;
+    }
+
+    .map-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #FFD700;
+      color: black;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .map-link:hover {
+      background-color: #e0c100;
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 10px #ffd700; }
+      50% { box-shadow: 0 0 20px #ffaa00; }
+    }
+
+    .gold-line {
+      height: 4px;
+      background: linear-gradient(to right, #000, #FFD700, #000);
+      margin: 30px 0;
+      border-radius: 2px;
+      animation: fadeInUp 1.5s ease forwards 3.5s;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-style: italic;
+      font-size: 17px;
+      color: #bbb;
+      animation: fadeInUp 1.5s ease forwards 5s;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background aura -->
+  <canvas id="auraCanvas"></canvas>
+
+  <div class="container">
+    <h1 id="mainTitle">🎖 Урилга 🎖</h1>
+
+    <div class="ceremony-description">
+      Монгол Улсын төрийн дээд шагнал болох
+      <span>“Монгол Улсын гавьяат тээвэрчин”</span>
+      цолыг хүртсэн эрхэм хүндэт
+      <span style="color: #fff;">Шагдарын Содмин</span>-ий хөдөлмөр, амьдралын гавьяаг хүндэтгэн,
+      түүний нэр төрийг албан ёсоор тунхаглах хүндэтгэлийн арга хэмжээнд таныг урьж байна.
+    </div>
+
+    <div class="gold-line"></div>
+
+    <div class="info">
+      <p>📅 <span class="highlight">Хэзээ:</span> 2025 оны 8-р сарын 15</p>
+      <p>🕔 <span class="highlight">Цаг:</span> 17:00 (Оройн 5)</p>
+      <p>📍 <span class="highlight">Хаана:</span> Төв аймаг, Зуунмод хот</p>
+      <a class="map-link" href="https://maps.app.goo.gl/eNZ1jYtYs7TRCXbE6" target="_blank">📍 Байршлыг харах</a>
+    </div>
+
+    <p class="footer">
+      Шагдар болон түүний гэр бүл, найз нөхөд нь<br>
+      танд гүнээ хүндэтгэлтэйгээр урилга хүргэж байна.
+    </p>
+  </div>
+
+  <script>
+    // Aura animation
+    const canvas = document.getElementById('auraCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const colors = ['#FFD700', '#FFEC8B', '#FFF8DC'];
+
+    function createParticle() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 1,
+        vy: (Math.random() - 0.5) * 1,
+        size: Math.random() * 2 + 0.5,
+        life: 0,
+        maxLife: 300 + Math.random() * 100,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      };
+    }
+
+    for (let i = 0; i < 180; i++) {
+      particles.push(createParticle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 10;
+        ctx.fill();
+
+        const title = document.getElementById("mainTitle");
+        const rect = title.getBoundingClientRect();
+        const target = {
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2
+        };
+
+        const dx = target.x - p.x;
+        const dy = target.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > 20) {
+          p.vx += dx / dist * 0.01;
+          p.vy += dy / dist * 0.01;
+        }
+
+        p.vx *= 0.96;
+        p.vy *= 0.96;
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        p.life++;
+        if (p.life > p.maxLife) {
+          Object.assign(p, createParticle());
+        }
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
