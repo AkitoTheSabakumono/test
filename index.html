@@ -8,16 +8,22 @@
   <style>
     /* Reset and base */
     html, body {
-      margin: 0; padding: 0;
-      height: 100%;
-      background: #000;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100%;
+      background: radial-gradient(circle at center, #1a1a1a 0%, #000 90%);
       font-family: 'Roboto', sans-serif;
       color: #fff;
-      overflow: hidden;
-      background: radial-gradient(circle at center, #1a1a1a 0%, #000 90%);
     }
 
-    /* Background aura canvas */
+    /* Emoji alignment fix */
+    .emoji {
+      font-size: 0.9em;
+      vertical-align: middle;
+    }
+
     canvas#auraCanvas {
       position: fixed;
       top: 0; left: 0;
@@ -27,15 +33,14 @@
       background: transparent;
     }
 
-    /* Container with luxurious border and subtle marble texture */
     .container {
       position: relative;
       z-index: 2;
-      max-width: 600px; /* reduced width */
+      max-width: 600px;
       margin: 80px auto 100px auto;
       background: 
         url('https://www.transparenttextures.com/patterns/gold-fish-scale.png') repeat,
-        rgba(10, 10, 10, 0.85); /* slightly more transparent */
+        rgba(10, 10, 10, 0.85);
       background-blend-mode: overlay;
       color: #eee;
       border: 3px solid #FFD700;
@@ -46,13 +51,12 @@
       box-shadow:
         0 0 40px 8px rgba(255, 215, 0, 0.6),
         inset 0 0 60px 12px rgba(255, 215, 0, 0.15);
-      backdrop-filter: blur(4px); /* reduced blur */
+      backdrop-filter: blur(4px);
       text-align: center;
       animation: fadeIn 2s ease-out;
       user-select: none;
     }
 
-    /* Title */
     h1#mainTitle {
       font-family: 'Playfair Display', serif;
       font-size: 56px;
@@ -70,7 +74,6 @@
       user-select: text;
     }
 
-    /* Ceremony description */
     .ceremony-description {
       font-family: 'Cormorant Garamond', serif;
       font-size: 20px;
@@ -87,7 +90,6 @@
       font-weight: 700;
     }
 
-    /* Gold horizontal line */
     .gold-line {
       height: 5px;
       background: linear-gradient(90deg, #000, #FFD700 50%, #000);
@@ -99,7 +101,6 @@
       user-select: none;
     }
 
-    /* Info box */
     .info {
       margin-top: 10px;
       background: rgba(255, 255, 255, 0.06);
@@ -123,7 +124,6 @@
       font-weight: 700;
     }
 
-    /* Map link styled as luxurious button */
     .map-link {
       display: inline-block;
       margin-top: 26px;
@@ -146,7 +146,6 @@
       box-shadow: 0 0 35px #ffcc00;
     }
 
-    /* Footer text */
     .footer {
       margin-top: 48px;
       font-style: italic;
@@ -158,7 +157,6 @@
       line-height: 1.6;
     }
 
-    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
@@ -179,7 +177,6 @@
       50% { box-shadow: 0 0 40px #FFAA00; }
     }
 
-    /* Light rays behind title */
     #lightRays {
       position: absolute;
       top: 120px;
@@ -205,7 +202,7 @@
   <!-- Aura Canvas -->
   <canvas id="auraCanvas"></canvas>
 
-  <!-- Soft light rays behind title -->
+  <!-- Light Rays -->
   <svg id="lightRays" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <defs>
       <radialGradient id="rayGradient" cx="50%" cy="100%" r="80%">
@@ -217,7 +214,7 @@
   </svg>
 
   <div class="container" role="main" aria-label="Invitation to Honor Ceremony">
-    <h1 id="mainTitle">🎖 Урилга 🎖</h1>
+    <h1 id="mainTitle"><span class="emoji">🎖</span> Урилга <span class="emoji">🎖</span></h1>
 
     <div class="ceremony-description">
       Монгол улсын ерөнхийлөгчийн зарлигиар
@@ -244,7 +241,6 @@
   </div>
 
   <script>
-    // Aura particle animation enhanced with sparkle effect
     const canvas = document.getElementById('auraCanvas');
     const ctx = canvas.getContext('2d');
     let W, H;
@@ -256,7 +252,6 @@
       canvas.height = H;
     }
     resize();
-
     window.addEventListener('resize', resize);
 
     const colors = ['#FFD700', '#FFEC8B', '#FFF8DC'];
@@ -273,7 +268,7 @@
         life: 0,
         maxLife: 300 + Math.random() * 120,
         color: colors[Math.floor(Math.random() * colors.length)],
-        sparkle: Math.random() < 0.02,  // 2% chance sparkle
+        sparkle: Math.random() < 0.02,
         sparkleLife: 0,
         sparkleDuration: 50 + Math.random() * 50
       };
@@ -285,7 +280,6 @@
 
     function animate() {
       ctx.clearRect(0, 0, W, H);
-
       const title = document.getElementById("mainTitle");
       const rect = title.getBoundingClientRect();
       const target = {
@@ -298,7 +292,6 @@
         const radius = p.sparkle ? p.size * 1.5 : p.size;
         ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
 
-        // Sparkle flicker
         if (p.sparkle && p.sparkleLife < p.sparkleDuration) {
           const alpha = 1 - p.sparkleLife / p.sparkleDuration;
           ctx.fillStyle = `rgba(255, 250, 205, ${alpha})`;
@@ -310,7 +303,7 @@
           ctx.shadowColor = p.color;
           ctx.shadowBlur = 10;
           if (p.sparkle) {
-            p.sparkle = false; // sparkle ended
+            p.sparkle = false;
           } else if (Math.random() < 0.005) {
             p.sparkle = true;
             p.sparkleLife = 0;
@@ -319,20 +312,16 @@
 
         ctx.fill();
 
-        // Particle moves toward title gently
         const dx = target.x - p.x;
         const dy = target.y - p.y;
         p.vx += dx * 0.00015;
         p.vy += dy * 0.00015;
-
-        // Add slight friction
         p.vx *= 0.98;
         p.vy *= 0.98;
-
         p.x += p.vx;
         p.y += p.vy;
-
         p.life++;
+
         if (p.life > p.maxLife || p.x < -50 || p.x > W + 50 || p.y < -50 || p.y > H + 50) {
           Object.assign(p, createParticle());
         }
