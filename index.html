@@ -50,6 +50,28 @@
       text-align: center;
       animation: fadeIn 2s ease-out;
       user-select: none;
+      overflow: visible;
+    }
+
+    /* Soyombo symbol in top-left corner */
+    .soyombo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 48px;
+      height: 128px;
+      fill: url(#goldGradient);
+      filter:
+        drop-shadow(0 0 4px #FFD700);
+      opacity: 0.65;
+      transition: opacity 0.3s ease;
+      user-select: none;
+    }
+    .soyombo:hover {
+      opacity: 1;
+      filter:
+        drop-shadow(0 0 12px #FFD700);
+      cursor: default;
     }
 
     /* Title */
@@ -68,14 +90,6 @@
         0 0 60px #FFB800;
       animation: glowText 3s infinite ease-in-out;
       user-select: text;
-    }
-
-    /* Golden crest SVG container */
-    .crest-container {
-      margin: 10px auto 30px auto;
-      width: 100px;
-      filter: drop-shadow(0 0 6px #FFD700);
-      user-select: none;
     }
 
     /* Ceremony description */
@@ -225,21 +239,31 @@
   </svg>
 
   <div class="container" role="main" aria-label="Invitation to Honor Ceremony">
-    <h1 id="mainTitle">🎖 Урилга 🎖</h1>
+    <!-- Mongolian Soyombo Symbol -->
+    <svg class="soyombo" viewBox="0 0 64 176" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" role="img" aria-label="Монголын Соёмбо тэмдэг">
+      <defs>
+        <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFD700"/>
+          <stop offset="100%" stop-color="#FFA500"/>
+        </linearGradient>
+      </defs>
+      <g fill="url(#goldGradient)" stroke="#FFD700" stroke-width="1">
+        <!-- Top flame -->
+        <path d="M32 4 L40 32 L32 24 L24 32 Z" />
+        <!-- Circle under flame -->
+        <circle cx="32" cy="48" r="10" />
+        <!-- Triangle (sun and moon shape) -->
+        <path d="M32 58 L36 70 L28 70 Z" />
+        <!-- Vertical bars -->
+        <rect x="30" y="72" width="4" height="60" />
+        <!-- Bottom rectangle -->
+        <rect x="22" y="134" width="20" height="30" rx="4" ry="4" />
+        <!-- Base line -->
+        <line x1="16" y1="166" x2="48" y2="166" stroke="#FFA500" stroke-width="3" />
+      </g>
+    </svg>
 
-    <div class="crest-container" aria-hidden="true">
-      <!-- Golden Crest SVG -->
-      <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-        <circle cx="32" cy="32" r="30" stroke="#FFD700" stroke-width="3" />
-        <path d="M16 32 L32 16 L48 32 L32 48 Z" fill="url(#goldGradient)" />
-        <defs>
-          <linearGradient id="goldGradient" x1="16" y1="32" x2="48" y2="32" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FFD700"/>
-            <stop offset="1" stop-color="#FFA500"/>
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
+    <h1 id="mainTitle">🎖 Урилга 🎖</h1>
 
     <div class="ceremony-description">
       Монгол улсын ерөнхийлөгчийн зарлигиар
