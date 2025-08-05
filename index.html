@@ -401,31 +401,16 @@
   const audio = document.getElementById('bg-music');
   const playBtn = document.getElementById('playBtn');
 
-  function playMusic() {
-    if (audio.paused) {
-      try {
-        audio.muted = false; // make sure it's unmuted
-        audio.play();
-        playBtn.style.display = 'none';
-        document.removeEventListener('click', playMusic);
-        document.removeEventListener('touchstart', playMusic);
-      } catch (e) {
-        console.warn("Audio play failed", e);
-        // Let user click manually if auto fails
-        playBtn.style.display = 'block';
-      }
-    }
-  }
-
-  // User click on button
   playBtn.addEventListener('click', () => {
-    playMusic();
+    audio.play().then(() => {
+      playBtn.style.display = 'none'; // hide button after playing
+    }).catch(err => {
+      console.error('Audio play error:', err);
+      alert('Төхөөрөмж таныг хөгжим тоглуулахыг зөвшөөрсөнгүй.');
+    });
   });
-
-  // Auto-trigger music on first interaction
-  document.addEventListener('click', playMusic);
-  document.addEventListener('touchstart', playMusic);
 </script>
+
 
 
 
