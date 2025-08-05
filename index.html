@@ -402,22 +402,31 @@
   const playBtn = document.getElementById('playBtn');
 
   function playMusic() {
-    audio.play().then(() => {
-      playBtn.style.display = 'none'; // hide after auto-play
-      document.removeEventListener('click', playMusic);
-      document.removeEventListener('touchstart', playMusic);
-    }).catch((err) => {
-      console.error('Audio play error:', err);
-      alert('Хөгжим тоглуулах боломжгүй байна. Та дахин оролдоно уу.');
-    });
+    if (audio.paused) {
+      try {
+        audio.muted = false; // make sure it's unmuted
+        audio.play();
+        playBtn.style.display = 'none';
+        document.removeEventListener('click', playMusic);
+        document.removeEventListener('touchstart', playMusic);
+      } catch (e) {
+        console.warn("Audio play failed", e);
+        // Let user click manually if auto fails
+        playBtn.style.display = 'block';
+      }
+    }
   }
 
-  playBtn.addEventListener('click', playMusic);
+  // User click on button
+  playBtn.addEventListener('click', () => {
+    playMusic();
+  });
 
-  // Auto-click on first user interaction
+  // Auto-trigger music on first interaction
   document.addEventListener('click', playMusic);
   document.addEventListener('touchstart', playMusic);
 </script>
+
 
 
 </body>
