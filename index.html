@@ -397,19 +397,28 @@
     }
     animate();
   </script>
-  <script>
+ <script>
   const audio = document.getElementById('bg-music');
   const playBtn = document.getElementById('playBtn');
 
-  playBtn.addEventListener('click', () => {
+  function playMusic() {
     audio.play().then(() => {
-      playBtn.style.display = 'none'; // hide button after playing
-    }).catch(err => {
+      playBtn.style.display = 'none'; // hide after auto-play
+      document.removeEventListener('click', playMusic);
+      document.removeEventListener('touchstart', playMusic);
+    }).catch((err) => {
       console.error('Audio play error:', err);
-      alert('Төхөөрөмж таныг хөгжим тоглуулахыг зөвшөөрсөнгүй.');
+      alert('Хөгжим тоглуулах боломжгүй байна. Та дахин оролдоно уу.');
     });
-  });
+  }
+
+  playBtn.addEventListener('click', playMusic);
+
+  // Auto-click on first user interaction
+  document.addEventListener('click', playMusic);
+  document.addEventListener('touchstart', playMusic);
 </script>
+
 
 </body>
 </html>
