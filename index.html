@@ -27,6 +27,31 @@
       z-index: 0;
       background: transparent;
     }
+   
+    .play-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #FFD700;
+  color: #000;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 0 15px #FFD700;
+  cursor: pointer;
+  z-index: 999;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+.play-button:hover {
+  background-color: #e0c100;
+  transform: scale(1.05);
+}
+
+  
 
     /* Container with luxurious border and subtle marble texture */
     .container {
@@ -207,24 +232,12 @@
   </style>
 </head>
 <body>
-  <audio id="bg-music" autoplay loop muted>
+  <button id="playBtn" class="play-button">🎵 Хөгжим тоглуулах</button>
+  <audio id="bg-music" loop>
   <source src="music.mp3" type="audio/mpeg" />
   Таны хөтөч хөгжим тоглуулахгүй байж магадгүй.
 </audio>
 
-<script>
-  const audio = document.getElementById('bg-music');
-
-  function enableAudio() {
-    audio.muted = false;
-    audio.play();
-    document.removeEventListener('click', enableAudio);
-    document.removeEventListener('touchstart', enableAudio);
-  }
-
-  document.addEventListener('click', enableAudio);
-  document.addEventListener('touchstart', enableAudio); // for mobile
-</script>
 
 
 
@@ -384,5 +397,19 @@
     }
     animate();
   </script>
+  <script>
+  const audio = document.getElementById('bg-music');
+  const playBtn = document.getElementById('playBtn');
+
+  playBtn.addEventListener('click', () => {
+    audio.play().then(() => {
+      playBtn.style.display = 'none'; // hide button after playing
+    }).catch(err => {
+      console.error('Audio play error:', err);
+      alert('Төхөөрөмж таныг хөгжим тоглуулахыг зөвшөөрсөнгүй.');
+    });
+  });
+</script>
+
 </body>
 </html>
