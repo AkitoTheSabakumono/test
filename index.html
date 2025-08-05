@@ -8,25 +8,17 @@
   <style>
     /* Reset and base */
     html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      overflow-y: auto;
-      min-height: 100%;
-      background: radial-gradient(circle at center, #1a1a1a 0%, #000 90%);
-      font-family: 'Roboto', sans-serif;
-      color: #fff;
-    }
-
-    /* Emoji alignment fix */
-    .emoji {
-  font-size: 1em;
-  vertical-align: middle;
-  line-height: 1;
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "EmojiOne Color", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* block sideways scroll */
+  overflow-y: auto;   /* allow vertical scroll */
+  min-height: 100%;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000 90%);
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
 }
-    }
 
+    /* Background aura canvas */
     canvas#auraCanvas {
       position: fixed;
       top: 0; left: 0;
@@ -36,14 +28,15 @@
       background: transparent;
     }
 
+    /* Container with luxurious border and subtle marble texture */
     .container {
       position: relative;
       z-index: 2;
-      max-width: 600px;
+      max-width: 600px; /* reduced width */
       margin: 80px auto 100px auto;
       background: 
         url('https://www.transparenttextures.com/patterns/gold-fish-scale.png') repeat,
-        rgba(10, 10, 10, 0.85);
+        rgba(10, 10, 10, 0.85); /* slightly more transparent */
       background-blend-mode: overlay;
       color: #eee;
       border: 3px solid #FFD700;
@@ -54,12 +47,13 @@
       box-shadow:
         0 0 40px 8px rgba(255, 215, 0, 0.6),
         inset 0 0 60px 12px rgba(255, 215, 0, 0.15);
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px); /* reduced blur */
       text-align: center;
       animation: fadeIn 2s ease-out;
       user-select: none;
     }
 
+    /* Title */
     h1#mainTitle {
       font-family: 'Playfair Display', serif;
       font-size: 56px;
@@ -77,6 +71,7 @@
       user-select: text;
     }
 
+    /* Ceremony description */
     .ceremony-description {
       font-family: 'Cormorant Garamond', serif;
       font-size: 20px;
@@ -93,6 +88,7 @@
       font-weight: 700;
     }
 
+    /* Gold horizontal line */
     .gold-line {
       height: 5px;
       background: linear-gradient(90deg, #000, #FFD700 50%, #000);
@@ -104,6 +100,7 @@
       user-select: none;
     }
 
+    /* Info box */
     .info {
       margin-top: 10px;
       background: rgba(255, 255, 255, 0.06);
@@ -127,6 +124,7 @@
       font-weight: 700;
     }
 
+    /* Map link styled as luxurious button */
     .map-link {
       display: inline-block;
       margin-top: 26px;
@@ -149,6 +147,7 @@
       box-shadow: 0 0 35px #ffcc00;
     }
 
+    /* Footer text */
     .footer {
       margin-top: 48px;
       font-style: italic;
@@ -160,6 +159,7 @@
       line-height: 1.6;
     }
 
+    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
@@ -180,6 +180,7 @@
       50% { box-shadow: 0 0 40px #FFAA00; }
     }
 
+    /* Light rays behind title */
     #lightRays {
       position: absolute;
       top: 120px;
@@ -198,6 +199,11 @@
       0%, 100% { opacity: 0.18; }
       50% { opacity: 0.28; }
     }
+    .emoji {
+  font-size: 0.9em;
+  vertical-align: middle;
+}
+
   </style>
 </head>
 <body>
@@ -205,7 +211,7 @@
   <!-- Aura Canvas -->
   <canvas id="auraCanvas"></canvas>
 
-  <!-- Light Rays -->
+  <!-- Soft light rays behind title -->
   <svg id="lightRays" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
     <defs>
       <radialGradient id="rayGradient" cx="50%" cy="100%" r="80%">
@@ -217,13 +223,22 @@
   </svg>
 
   <div class="container" role="main" aria-label="Invitation to Honor Ceremony">
-    <h1 id="mainTitle"><span class="emoji">🎖</span> Урилга <span class="emoji">🎖</span></h1>
+    <!-- Medal image above title -->
+<img 
+  src="https://drive.google.com/uc?export=view&id=1KC70NT_AbO0AEjIKU3ZTWzrAVa8gGG7W" 
+  alt="Medal" 
+  style="max-width: 160px; width: 60%; height: auto; margin: 0 auto 30px auto; display: block; box-shadow: 0 0 25px #FFD700; border-radius: 12px;"
+/>
+
+<h1 id="mainTitle">Урилга</h1>
+
+
 
     <div class="ceremony-description">
-      Монгол улсын ерөнхийлөгчийн зарлигиар
+      Монгол улсын ерөнхийлөгчийн зарлигаар
       <span>“Монгол Улсын гавьяат тээвэрчин”</span>
       цолыг хүртсэн эрхэм хүндэт
-      <span style="color: #fff; font-weight: 700;">Содминын Шагдар</span>-ий хөдөлмөр, амьдралын гавьяаг хүндэтгэн,
+      <span style="color: #fff; font-weight: 700;">Содномын Шагдар</span>-ийн хөдөлмөр, амьдралын гавьяаг хүндэтгэн,
       түүний нэр төрийг албан ёсоор тунхаглах хүндэтгэлийн арга хэмжээнд таныг урьж байна.
     </div>
 
@@ -244,6 +259,7 @@
   </div>
 
   <script>
+    // Aura particle animation enhanced with sparkle effect
     const canvas = document.getElementById('auraCanvas');
     const ctx = canvas.getContext('2d');
     let W, H;
@@ -255,6 +271,7 @@
       canvas.height = H;
     }
     resize();
+
     window.addEventListener('resize', resize);
 
     const colors = ['#FFD700', '#FFEC8B', '#FFF8DC'];
@@ -271,7 +288,7 @@
         life: 0,
         maxLife: 300 + Math.random() * 120,
         color: colors[Math.floor(Math.random() * colors.length)],
-        sparkle: Math.random() < 0.02,
+        sparkle: Math.random() < 0.02,  // 2% chance sparkle
         sparkleLife: 0,
         sparkleDuration: 50 + Math.random() * 50
       };
@@ -283,6 +300,7 @@
 
     function animate() {
       ctx.clearRect(0, 0, W, H);
+
       const title = document.getElementById("mainTitle");
       const rect = title.getBoundingClientRect();
       const target = {
@@ -295,6 +313,7 @@
         const radius = p.sparkle ? p.size * 1.5 : p.size;
         ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
 
+        // Sparkle flicker
         if (p.sparkle && p.sparkleLife < p.sparkleDuration) {
           const alpha = 1 - p.sparkleLife / p.sparkleDuration;
           ctx.fillStyle = `rgba(255, 250, 205, ${alpha})`;
@@ -306,7 +325,7 @@
           ctx.shadowColor = p.color;
           ctx.shadowBlur = 10;
           if (p.sparkle) {
-            p.sparkle = false;
+            p.sparkle = false; // sparkle ended
           } else if (Math.random() < 0.005) {
             p.sparkle = true;
             p.sparkleLife = 0;
@@ -315,16 +334,20 @@
 
         ctx.fill();
 
+        // Particle moves toward title gently
         const dx = target.x - p.x;
         const dy = target.y - p.y;
         p.vx += dx * 0.00015;
         p.vy += dy * 0.00015;
+
+        // Add slight friction
         p.vx *= 0.98;
         p.vy *= 0.98;
+
         p.x += p.vx;
         p.y += p.vy;
-        p.life++;
 
+        p.life++;
         if (p.life > p.maxLife || p.x < -50 || p.x > W + 50 || p.y < -50 || p.y > H + 50) {
           Object.assign(p, createParticle());
         }
