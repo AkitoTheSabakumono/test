@@ -207,9 +207,25 @@
   </style>
 </head>
 <body>
-  <audio id="bg-music" autoplay loop>
+  <audio id="bg-music" autoplay loop muted>
   <source src="music.mp3" type="audio/mpeg" />
+  Таны хөтөч хөгжим тоглуулахгүй байж магадгүй.
 </audio>
+
+<script>
+  const audio = document.getElementById('bg-music');
+
+  function enableAudio() {
+    audio.muted = false;
+    audio.play();
+    document.removeEventListener('click', enableAudio);
+    document.removeEventListener('touchstart', enableAudio);
+  }
+
+  document.addEventListener('click', enableAudio);
+  document.addEventListener('touchstart', enableAudio); // for mobile
+</script>
+
 
 
 
