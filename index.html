@@ -228,6 +228,50 @@
   font-size: 0.9em;
   vertical-align: middle;
 }
+    .medal-background {
+  position: relative;
+  width: 220px;
+  height: 190px;
+  margin: 0 auto 20px auto;
+  z-index: 5;
+}
+
+.hex-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(
+    50% 0%, 93% 25%, 93% 75%, 
+    50% 100%, 7% 75%, 7% 25%
+  );
+  border: 2px solid gold;
+  box-shadow: 0 0 18px rgba(255, 215, 0, 0.5);
+}
+
+.layer1 {
+  background: linear-gradient(135deg, #6a0572, #36013f);
+  transform: scale(1);
+  z-index: 1;
+}
+
+.layer2 {
+  background: linear-gradient(135deg, #5a006d, #2a0033);
+  transform: scale(0.85);
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+.layer3 {
+  background: linear-gradient(135deg, #420052, #180020);
+  transform: scale(0.7);
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+}
+
 
   </style>
 </head>
@@ -260,6 +304,12 @@
     <!-- Medal image above title -->
 <!-- Glowing medal image above title -->
 <img 
+  <div class="medal-background">
+  <div class="hex-layer layer1"></div>
+  <div class="hex-layer layer2"></div>
+  <div class="hex-layer layer3"></div>
+</div>
+
   src="medal-removebg-preview.png" 
   alt="Medal" 
   style="
